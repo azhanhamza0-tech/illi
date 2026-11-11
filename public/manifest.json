@@ -1,0 +1,26 @@
+{
+  "name": "RWANIN — ڕوانین پلاتفۆرمی پەخشی فیلم و زنجیرە",
+  "short_name": "RWANIN",
+  "description": "پلاتفۆرمی یەکەمی کوردی بۆ پەخشی فیلم و زنجیرە سینەماییەکان بە کوالێتی 4K Ultra HD",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#08090C",
+  "theme_color": "#08090C",
+  "orientation": "any",
+  "dir": "rtl",
+  "lang": "ckb",
+  "icons": [
+    {
+      "src": "/rwanin-mark.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/rwanin-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

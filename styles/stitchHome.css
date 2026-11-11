@@ -1,0 +1,99 @@
+/* ==========================================================================
+   RWANIN (ڕوانین) — STITCH ULTRA PREMIUM HOME FEED
+   Exact 1:1 Implementation of Google Stitch Design + Full Interactive Commands
+   ========================================================================== */
+
+.stitch-home-root {
+  --c-primary: 192 193 255;
+  --c-primary-container: 128 131 255;
+  --c-on-primary: 16 0 169;
+  --c-primary-fixed: 225 224 255;
+  --c-primary-fixed-dim: 192 193 255;
+  --c-on-primary-container: 13 0 150;
+  --c-inverse-primary: 73 75 214;
+  --c-secondary: 208 188 255;
+  --c-secondary-container: 87 27 193;
+  --c-on-secondary: 60 0 145;
+  --c-on-secondary-container: 196 171 255;
+  --c-secondary-fixed: 233 221 255;
+  --c-tertiary: 236 193 94;
+  --c-tertiary-container: 178 139 45;
+  --c-on-tertiary: 63 46 0;
+  --c-surface: 18 19 23;
+  --c-surface-base: 8 9 13;
+  --c-surface-raised: 16 18 24;
+  --c-surface-card: 23 26 34;
+  --c-surface-container: 30 31 36;
+  --c-surface-container-low: 26 27 32;
+  --c-surface-container-lowest: 13 14 18;
+  --c-surface-container-high: 41 42 46;
+  --c-surface-container-highest: 52 52 57;
+  --c-surface-variant: 52 52 57;
+  --c-on-surface: 227 226 232;
+  --c-on-surface-variant: 199 196 215;
+  --c-metallic-silver: 226 232 240;
+  --c-metallic-muted: 148 163 184;
+  --c-accent-electric-blue: 56 189 248;
+  --c-error: 255 180 171;
+  --c-outline-variant: 70 69 84;
+
+  min-height: 100vh;
+  width: 100%;
+  background-color: #08090D;
+  color: #e3e2e8;
+  font-family: 'Outfit', 'Noto Kufi Arabic', 'Vazirmatn', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.stitch-home-root .material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  user-select: none;
+  vertical-align: middle;
+}
+
+/* Fade-in Animation */
+@keyframes stitch-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: stitch-fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Header glass & dropdown panels */
+.stitch-popover-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  background: rgba(16, 18, 24, 0.96);
+  border: 1px solid rgba(192, 193, 255, 0.16);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(128, 131, 255, 0.15);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 100;
+  animation: stitch-fade-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Custom subtle scrollbars for carousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Light Ambient Overlay mode (optional toggle on dark_mode button) */
+.stitch-home-root.cinema-bright-mode {
+  --c-surface-base: 16 18 28;
+  --c-surface-card: 28 32 46;
+}
+

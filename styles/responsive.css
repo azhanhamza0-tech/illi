@@ -1,0 +1,920 @@
+/* ==========================================================================
+   RWANIN (ڕوانین) — ADVANCED RESPONSIVE SYSTEM & BREAKPOINTS (RTL-FIRST)
+   Supports: XS (320px) to Ultrawide (2560px+)
+   Zero horizontal overflow • Safe-area aware • Touch-optimized
+   ========================================================================== */
+
+/* Main Layout Wrapper */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--bg-main);
+  position: relative;
+  direction: rtl;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Sidebar on Desktop (Docked on Right for RTL) */
+.app-sidebar {
+  width: var(--sidebar-width);
+  height: 100vh;
+  height: 100dvh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: auto;
+  z-index: 100;
+  background: var(--bg-secondary);
+  border-left: 1px solid var(--border-subtle);
+  border-right: none;
+  display: flex;
+  flex-direction: column;
+  transition: width var(--transition-normal), transform var(--transition-normal);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+.app-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Collapsed Sidebar State (Desktop & Tablet) */
+.app-sidebar.collapsed {
+  width: var(--sidebar-collapsed-width) !important;
+}
+
+.app-sidebar.collapsed .sidebar-label,
+.app-sidebar.collapsed .sidebar-badge,
+.app-sidebar.collapsed .sidebar-section-title,
+.app-sidebar.collapsed .sidebar-footer-text,
+.app-sidebar.collapsed .sidebar-user-details,
+.app-sidebar.collapsed .sidebar-hide-collapsed {
+  display: none !important;
+}
+
+.app-sidebar.collapsed .sidebar-item {
+  justify-content: center !important;
+  padding: 12px !important;
+}
+
+/* Main Content Area */
+.app-main {
+  flex: 1;
+  margin-right: var(--sidebar-width);
+  margin-left: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  transition: margin-right var(--transition-normal), width var(--transition-normal);
+  width: calc(100% - var(--sidebar-width));
+  max-width: 100%;
+  position: relative;
+}
+
+.app-main.sidebar-collapsed {
+  margin-right: var(--sidebar-collapsed-width) !important;
+  width: calc(100% - var(--sidebar-collapsed-width)) !important;
+}
+
+.page-content {
+  flex: 1;
+  width: 100%;
+  padding-bottom: 80px;
+}
+
+/* Header */
+.app-header {
+  height: var(--header-height);
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--page-padding-x);
+  background: var(--bg-glass);
+  backdrop-filter: var(--blur-header);
+  -webkit-backdrop-filter: var(--blur-header);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: height var(--transition-fast), padding var(--transition-fast);
+}
+
+.mobile-brand-logo {
+  display: none;
+}
+
+.mobile-search-toggle {
+  display: none;
+}
+
+.home-page-container {
+  padding: 24px 32px 60px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Mobile Bottom Navigation */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: var(--bg-glass-card);
+  backdrop-filter: var(--blur-header);
+  -webkit-backdrop-filter: var(--blur-header);
+  border-top: 1px solid var(--border-subtle);
+  z-index: 100;
+  justify-content: space-around;
+  align-items: center;
+  padding-inline: 6px;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.mobile-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-nav-item.active {
+  color: var(--text-silver-bright);
+  font-weight: 800;
+}
+
+.mobile-nav-item:active {
+  transform: scale(0.94);
+}
+
+/* Default Movie Grid (Auto-Fill Fluid) */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 18px;
+  width: 100%;
+}
+
+/* Default Horizontal Carousel Track */
+.carousel-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - (5 * 16px)) / 6);
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-item {
+  scroll-snap-align: start;
+  min-width: 0;
+}
+
+/* ==========================================================================
+   BREAKPOINTS SPECIFICATION
+   ========================================================================== */
+
+/* 1. ULTRAWIDE & LARGE MONITORS (1920px+) */
+@media (min-width: 1920px) {
+  .app-main {
+    align-items: center;
+  }
+
+  .page-content {
+    max-width: var(--content-max-width);
+    width: 100%;
+  }
+
+  .movie-grid {
+    grid-template-columns: repeat(7, 1fr) !important;
+    gap: 22px !important;
+  }
+
+  .carousel-track {
+    grid-auto-columns: calc((100% - (6 * 20px)) / 7) !important;
+    gap: 20px !important;
+  }
+}
+
+/* 2. LARGE DESKTOP (1536px – 1919px) */
+@media (min-width: 1536px) and (max-width: 1919px) {
+  .movie-grid {
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 20px !important;
+  }
+
+  .carousel-track {
+    grid-auto-columns: calc((100% - (5 * 18px)) / 6) !important;
+    gap: 18px !important;
+  }
+}
+
+/* 3. STANDARD DESKTOP (1280px – 1535px) */
+@media (min-width: 1280px) and (max-width: 1535px) {
+  .movie-grid {
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 18px !important;
+  }
+
+  .carousel-track {
+    grid-auto-columns: calc((100% - (4 * 16px)) / 5) !important;
+    gap: 16px !important;
+  }
+}
+
+/* 4. LAPTOP / SMALL DESKTOP (1024px – 1279px) */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .movie-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  .carousel-track {
+    grid-auto-columns: calc((100% - (3 * 16px)) / 4) !important;
+    gap: 16px !important;
+  }
+}
+
+/* 5. TABLET (768px – 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root {
+    --sidebar-width: 80px;
+    --sidebar-current-width: 80px;
+  }
+
+  .app-sidebar {
+    width: 80px !important;
+  }
+
+  .sidebar-label,
+  .sidebar-badge,
+  .sidebar-section-title,
+  .sidebar-footer-text,
+  .sidebar-user-details,
+  .sidebar-hide-collapsed {
+    display: none !important;
+  }
+
+  .sidebar-item {
+    justify-content: center !important;
+    padding: 12px !important;
+  }
+
+  .app-main {
+    margin-right: 80px !important;
+    width: calc(100% - 80px) !important;
+  }
+
+  .movie-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 14px !important;
+  }
+
+  .carousel-track {
+    grid-auto-columns: calc((100% - (2 * 14px)) / 3.3) !important;
+    gap: 14px !important;
+  }
+
+  .app-header {
+    padding: 0 20px;
+  }
+}
+
+/* 6. MOBILE FIRST: ALL PHONES (< 768px) */
+@media (max-width: 767px) {
+  :root {
+    --sidebar-current-width: 0px;
+  }
+
+  .app-sidebar {
+    display: none !important;
+  }
+
+  .app-main {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .mobile-bottom-nav {
+    display: flex !important;
+  }
+
+  .page-content {
+    padding-bottom: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom, 0px) + 24px) !important;
+  }
+
+  .app-header {
+    padding: 0 12px;
+    height: 58px;
+  }
+
+  .mobile-brand-logo {
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .mobile-search-toggle {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .header-search-bar {
+    display: none !important;
+  }
+
+  .home-page-container {
+    padding: 16px 12px 60px !important;
+  }
+
+  .home-content-tabs-wrap {
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .staff-tabs-ribbon {
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .rwanin-hide-mobile {
+    display: none !important;
+  }
+
+  /* Responsive Movie Details Header */
+  .movie-details-banner {
+    height: 42vh !important;
+    min-height: 260px !important;
+  }
+
+  .movie-details-content {
+    margin-top: -60px !important;
+    padding: 0 16px 40px !important;
+  }
+  /* Mobile 2-Column Movie Grid */
+  .movie-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: clamp(8px, 2.5vw, 12px) !important;
+    width: 100% !important;
+  }
+}
+
+/* 7. PHABLETS & LARGE PHONES (480px – 767px) */
+@media (min-width: 480px) and (max-width: 767px) {
+  .movie-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  .carousel-track {
+    grid-auto-columns: calc((100% - (2 * 12px)) / 2.6) !important;
+    gap: 12px !important;
+  }
+}
+
+/* 8. STANDARD PHONES (375px – 479px) */
+@media (min-width: 375px) and (max-width: 479px) {
+  .header-search-bar {
+    display: none;
+  }
+
+  .movie-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .carousel-track {
+    grid-auto-columns: calc((100% - 12px) / 2.15) !important;
+    gap: 12px !important;
+  }
+
+  .hero-container {
+    min-height: 380px !important;
+    height: 54vh !important;
+  }
+}
+
+/* 9. SMALL PHONES (320px – 374px) */
+@media (max-width: 374px) {
+  .header-search-bar {
+    display: none;
+  }
+
+  .app-header {
+    padding: 0 10px;
+  }
+
+  .movie-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  .carousel-track {
+    grid-auto-columns: calc((100% - 8px) / 1.85) !important;
+    gap: 8px !important;
+  }
+
+  .hero-container {
+    min-height: 340px !important;
+    height: 52vh !important;
+  }
+
+  .hero-content {
+    padding: 20px 14px !important;
+  }
+
+  .hero-buttons {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .hero-buttons button {
+    width: 100% !important;
+  }
+}
+
+/* 10. LANDSCAPE MODE ON MOBILE */
+@media (max-height: 500px) and (orientation: landscape) {
+  .mobile-bottom-nav {
+    height: 52px !important;
+    padding-bottom: 2px !important;
+  }
+
+  .hero-container {
+    min-height: 260px !important;
+    height: 80vh !important;
+  }
+
+  .app-header {
+    height: 52px !important;
+  }
+
+  .page-content {
+    padding-bottom: 60px !important;
+  }
+}
+
+/* 11. MOBILE STICKY WATCH BAR & UTILITIES */
+.mobile-sticky-watch-bar {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .mobile-sticky-watch-bar {
+    display: block;
+    position: fixed;
+    bottom: calc(var(--mobile-nav-height, 64px) + env(safe-area-inset-bottom, 0px) + 8px);
+    inset-inline: 12px;
+    z-index: 95;
+    background: rgba(16, 18, 27, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-lg, 16px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+    animation: slideUpSticky 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mobile-sticky-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    gap: 10px;
+  }
+
+  .mobile-sticky-info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-width: 0;
+    gap: 2px;
+  }
+
+  .mobile-sticky-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mobile-sticky-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    color: var(--text-silver);
+  }
+
+  .mobile-sticky-rating {
+    color: #eab308;
+    font-weight: 700;
+  }
+
+  .mobile-sticky-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .touch-target-icon-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .touch-target-icon-btn:active {
+    background: rgba(255, 255, 255, 0.16);
+    transform: scale(0.96);
+  }
+}
+
+@keyframes slideUpSticky {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 12. ADMIN PANEL RESPONSIVE STYLES */
+.admin-mobile-header {
+  display: none !important;
+}
+
+.admin-backdrop {
+  display: none;
+}
+
+.admin-sidebar-close {
+  display: none;
+}
+
+.admin-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 270px;
+  z-index: 100;
+}
+
+.admin-main {
+  margin-right: 270px;
+  width: calc(100% - 270px);
+  min-height: 100vh;
+}
+
+.admin-table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-card);
+}
+
+.admin-table-container table {
+  min-width: 640px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+@media (max-width: 1023px) {
+  .admin-mobile-header {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    padding: 0 16px;
+    background-color: #0F1015;
+    border-bottom: 1px solid var(--border-subtle);
+    position: sticky;
+    top: 0;
+    z-index: 99;
+  }
+
+  .admin-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 280px !important;
+    max-width: 85vw !important;
+    z-index: 110 !important;
+    transform: translateX(100%) !important;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: -8px 0 28px rgba(0, 0, 0, 0.6) !important;
+  }
+
+  .admin-sidebar.open {
+    transform: translateX(0) !important;
+  }
+
+  .admin-sidebar-close {
+    display: flex !important;
+  }
+
+  .admin-backdrop.open {
+    display: block !important;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 105;
+  }
+
+  .admin-main {
+    margin-right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .admin-content-pad {
+    padding: clamp(14px, 3.5vw, 24px) !important;
+  }
+}
+
+/* 13. PREVIEW FLOATING BADGE */
+@media (max-width: 767px) {
+  .preview-floating-badge {
+    display: none !important;
+  }
+}
+
+.preview-floating-badge:hover {
+  transform: translateY(-2px);
+  background-color: rgba(28, 33, 50, 0.95) !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 10px 28px rgba(56, 189, 248, 0.25) !important;
+}
+
+/* 14. MOVIE DETAILS MOBILE SINGLE-COLUMN & ZERO HORIZONTAL SCROLL */
+.movie-details-grid {
+  display: flex;
+  flex-direction: row;
+  gap: clamp(18px, 3vw, 36px);
+  align-items: flex-start;
+  width: 100%;
+}
+
+.movie-details-poster-card {
+  width: clamp(170px, 24vw, 240px);
+  flex-shrink: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-card);
+  aspect-ratio: 2 / 3;
+}
+
+.movie-details-info-col {
+  flex: 1;
+  min-width: min(100%, 280px);
+}
+
+.movie-details-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .movie-details-grid {
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 16px !important;
+  }
+
+  .movie-details-poster-card {
+    width: min(100%, 210px) !important;
+    margin: 0 auto 10px auto !important;
+    max-width: 65vw !important;
+  }
+
+  .movie-details-info-col {
+    width: 100% !important;
+    min-width: 0 !important;
+    text-align: center !important;
+  }
+
+  .movie-details-badges {
+    justify-content: center !important;
+  }
+
+  .movie-details-specs {
+    justify-content: center !important;
+    gap: 8px !important;
+    font-size: 12px !important;
+  }
+
+  .movie-details-buttons {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  .movie-details-primary-action,
+  .movie-details-buttons > button:first-child,
+  .movie-details-buttons > .primary-btn {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .movie-details-buttons > * {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Account Tabs 2-Column Responsive Grid */
+  .account-tabs-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    border-bottom: none !important;
+    margin-bottom: 24px !important;
+    width: 100% !important;
+  }
+
+  .account-tab-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    font-size: 11px !important;
+    padding: 8px 8px !important;
+    border-radius: var(--radius-sm) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid var(--border-subtle) !important;
+    text-align: center !important;
+    white-space: normal !important;
+    min-height: 44px !important;
+  }
+
+  .account-tab-btn.active {
+    background: rgba(56, 189, 248, 0.12) !important;
+    border-color: #38bdf8 !important;
+    color: #38bdf8 !important;
+  }
+}
+
+/* ==========================================================================
+   GENRE FILTERS HORIZONTAL SCROLL RIBBON & CATALOG RESPONSIVE
+   ========================================================================== */
+.genre-filter-container {
+  display: flex !important;
+  gap: 8px !important;
+  overflow-x: auto !important;
+  white-space: nowrap !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+  padding-bottom: 8px !important;
+  margin-bottom: 24px !important;
+  width: 100% !important;
+}
+
+.genre-filter-container::-webkit-scrollbar {
+  display: none !important;
+}
+
+.genre-filter-container > button {
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+}
+
+@media (max-width: 768px) {
+  .catalog-filter-bar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+    padding: 12px !important;
+  }
+  
+  .catalog-filter-bar > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .catalog-filter-bar .quick-filters {
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+    padding-bottom: 4px !important;
+  }
+
+  .catalog-page-container {
+    padding: 16px 12px 80px !important;
+  }
+}
+
+/* Header Quick Links (Movies & Series) */
+.header-quick-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .header-quick-links {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   TOUCH, FORM & MOBILE SPECIFIC OPTIMIZATIONS
+   ========================================================================== */
+
+/* Prevent iOS Safari Automatic Zoom on Input Focus (Requirement 8 & 11) */
+@media (max-width: 768px) {
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="search"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Responsive Header Admin Text Toggle */
+.header-admin-text-mobile {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .header-admin-text-desktop {
+    display: none !important;
+  }
+  .header-admin-text-mobile {
+    display: inline !important;
+  }
+}
+
+/* Small Mobile Screen Utility (<= 390px, e.g. iPhone SE / small phones) */
+@media (max-width: 390px) {
+  .rwanin-hide-small-mobile {
+    display: none !important;
+  }
+}
+
+/* Safe Area Inset Utility Container */
+.safe-area-container {
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+}

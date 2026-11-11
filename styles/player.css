@@ -1,0 +1,911 @@
+/* ==========================================================================
+   RWANIN CINEMATIC VIDEO PLAYER STYLES (PURE VANILLA CSS)
+   ========================================================================== */
+
+/* Wrapper in Watch Page */
+.rwanin-watch-player-wrapper {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 var(--page-padding-x);
+  margin-top: 16px;
+  margin-bottom: 32px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .rwanin-watch-player-wrapper {
+    padding: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 16px !important;
+  }
+}
+
+
+/* Main Player Root Container */
+.rwanin-player-root {
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: 16 / 9;
+  max-height: 82vh;
+  background-color: #000000 !important;
+  border-radius: 20px;
+  overflow: hidden !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  user-select: none;
+  -webkit-user-select: none;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 768px) {
+  .rwanin-player-root {
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    max-height: none;
+  }
+}
+
+/* Fullscreen Mode Enforcements (Native & Pseudo-Fullscreen) */
+.rwanin-player-root.is-fullscreen,
+.rwanin-player-root.is-pseudo-fullscreen,
+:fullscreen .rwanin-player-root,
+:-webkit-full-screen .rwanin-player-root,
+:-moz-full-screen .rwanin-player-root,
+:-ms-fullscreen .rwanin-player-root {
+  position: fixed !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  max-height: 100vh !important;
+  max-height: 100dvh !important;
+  max-width: 100vw !important;
+  aspect-ratio: auto !important;
+  border-radius: 0 !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  z-index: 9999999 !important;
+  background-color: #000000 !important;
+}
+
+/* HTML5 Video Tag */
+.rwanin-video-tag {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  display: block !important;
+  background-color: #000000 !important;
+  z-index: 1 !important;
+  transition: object-fit 0.2s ease;
+}
+
+.rwanin-video-tag.fit-contain {
+  object-fit: contain !important;
+}
+
+.rwanin-video-tag.fit-cover {
+  object-fit: cover !important;
+}
+
+/* Fullscreen Video Tag */
+:fullscreen .rwanin-video-tag,
+:-webkit-full-screen .rwanin-video-tag,
+:-moz-full-screen .rwanin-video-tag,
+:-ms-fullscreen .rwanin-video-tag,
+.rwanin-player-root.is-fullscreen .rwanin-video-tag,
+.rwanin-player-root.is-pseudo-fullscreen .rwanin-video-tag {
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+/* Click / Tap Overlay */
+.rwanin-click-overlay {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 10 !important;
+  cursor: pointer !important;
+}
+
+/* Center Controls Hub (Directly in Center on Top of Video) */
+.rwanin-center-hub {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(12px, 3.5vw, 32px) !important;
+  z-index: 25 !important;
+  pointer-events: none !important;
+  transition: opacity 0.25s ease, transform 0.25s ease !important;
+}
+
+.rwanin-center-hub.visible {
+  opacity: 1 !important;
+  transform: translate(-50%, -50%) scale(1) !important;
+  pointer-events: auto !important;
+}
+
+.rwanin-center-hub.hidden {
+  opacity: 0 !important;
+  transform: translate(-50%, -50%) scale(0.92) !important;
+  pointer-events: none !important;
+}
+
+.rwanin-center-hub button {
+  pointer-events: auto !important;
+}
+
+/* Main Giant Play / Pause Button in Center Hub */
+.rwanin-giant-play-btn {
+  width: clamp(50px, 8vw, 84px) !important;
+  height: clamp(50px, 8vw, 84px) !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 2px solid rgba(255, 255, 255, 0.55) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 35px rgba(255, 255, 255, 0.2) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #FFFFFF !important;
+  cursor: pointer !important;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, box-shadow 0.2s ease !important;
+  outline: none !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.rwanin-giant-play-btn:hover {
+  transform: scale(1.1) !important;
+  background: rgba(255, 255, 255, 0.38) !important;
+  border-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.rwanin-giant-play-btn:active {
+  transform: scale(0.92) !important;
+}
+
+/* Skip 10s Circular Buttons */
+.rwanin-skip-circle-btn {
+  width: clamp(36px, 6vw, 56px) !important;
+  height: clamp(36px, 6vw, 56px) !important;
+  border-radius: 50% !important;
+  background: rgba(10, 11, 16, 0.75) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #FFFFFF !important;
+  cursor: pointer !important;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, border-color 0.2s ease !important;
+  outline: none !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.rwanin-skip-circle-btn:hover {
+  transform: scale(1.08) !important;
+  background: rgba(18, 20, 28, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.rwanin-skip-circle-btn:active {
+  transform: scale(0.9) !important;
+}
+
+.rwanin-skip-label {
+  font-size: 9px !important;
+  font-weight: 600 !important;
+  color: #D1D5DB !important;
+  margin-top: 1px !important;
+  line-height: 1 !important;
+}
+
+@media (max-width: 640px) {
+  .rwanin-center-hub {
+    gap: 12px !important;
+  }
+  .rwanin-giant-play-btn {
+    width: 48px !important;
+    height: 48px !important;
+  }
+  .rwanin-skip-circle-btn {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  .rwanin-skip-label {
+    display: none !important;
+  }
+}
+
+/* Top Bar (Header) */
+.rwanin-player-topbar {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  padding: clamp(10px, 2vw, 20px) clamp(12px, 2.5vw, 24px) !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.35) 60%, transparent 100%) !important;
+  z-index: 20 !important;
+  pointer-events: none !important;
+  transition: opacity 0.25s ease !important;
+}
+
+.rwanin-player-topbar.visible {
+  opacity: 1 !important;
+}
+
+.rwanin-player-topbar.hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.rwanin-player-topbar > * {
+  pointer-events: auto !important;
+}
+
+/* Hide duplicate header on mobile when not in fullscreen */
+@media (max-width: 768px) {
+  .rwanin-player-root:not(.is-fullscreen):not(.is-pseudo-fullscreen) .rwanin-player-topbar {
+    display: none !important;
+  }
+}
+
+.rwanin-topbar-back-btn {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 11px !important;
+  background: rgba(15, 16, 22, 0.8) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #FFFFFF !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: background 0.15s ease, transform 0.15s ease !important;
+  flex-shrink: 0 !important;
+}
+
+.rwanin-topbar-back-btn:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: scale(1.05) !important;
+}
+
+/* Skip Intro Floating Wrap */
+.rwanin-skip-intro-wrap {
+  position: absolute !important;
+  bottom: 74px !important;
+  left: 20px !important;
+  right: auto !important;
+  top: auto !important;
+  z-index: 30 !important;
+  pointer-events: auto !important;
+}
+
+@media (max-width: 768px) {
+  .rwanin-skip-intro-wrap {
+    bottom: 58px !important;
+    left: 12px !important;
+    right: auto !important;
+    top: auto !important;
+  }
+}
+
+/* Resume Prompt Floating Pill */
+.rwanin-resume-pill {
+  animation: rwaninFadeSlideUp 0.25s ease-out forwards;
+}
+
+@keyframes rwaninFadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Bottom Controls Container */
+.rwanin-controls-container {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  padding: clamp(8px, 1.8vw, 16px) !important;
+  padding-bottom: clamp(10px, 2vw, 18px) !important;
+  z-index: 25 !important;
+  pointer-events: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%) !important;
+  transition: opacity 0.25s ease !important;
+  box-sizing: border-box !important;
+}
+
+.rwanin-controls-container.visible {
+  opacity: 1 !important;
+}
+
+.rwanin-controls-container.hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Floating Frosted Glass Deck */
+.rwanin-floating-deck {
+  pointer-events: auto !important;
+  width: 100% !important;
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  background: rgba(10, 11, 16, 0.88) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 16px !important;
+  padding: clamp(6px, 1.4vw, 12px) clamp(10px, 1.8vw, 18px) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 768px) {
+  .rwanin-controls-container {
+    padding: 6px 8px 10px 8px !important;
+  }
+  .rwanin-floating-deck {
+    padding: 6px 10px !important;
+    border-radius: 14px !important;
+    gap: 5px !important;
+  }
+}
+
+/* Scrubber / Progress Bar */
+.rwanin-progress-wrap {
+  position: relative !important;
+  width: 100% !important;
+  padding: 6px 0 !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.rwanin-progress-track {
+  position: relative !important;
+  width: 100% !important;
+  height: 5px !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-radius: 999px !important;
+  overflow: hidden !important;
+  transition: height 0.15s ease !important;
+}
+
+.rwanin-progress-wrap:hover .rwanin-progress-track {
+  height: 8px !important;
+}
+
+.rwanin-progress-buffered {
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  background: rgba(255, 255, 255, 0.35) !important;
+  border-radius: 999px !important;
+  transition: width 0.3s ease !important;
+}
+
+.rwanin-progress-played {
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  background: linear-gradient(90deg, #FDE047 0%, #E2B755 50%, #FFFFFF 100%) !important;
+  border-radius: 999px !important;
+  box-shadow: 0 0 10px rgba(226, 183, 85, 0.6) !important;
+}
+
+.rwanin-progress-knob {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) scale(0) !important;
+  width: 14px !important;
+  height: 14px !important;
+  border-radius: 50% !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8) !important;
+  pointer-events: none !important;
+  transition: transform 0.15s ease !important;
+}
+
+.rwanin-progress-wrap:hover .rwanin-progress-knob {
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+
+/* Control Buttons Row */
+.rwanin-deck-row {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  direction: ltr !important;
+  box-sizing: border-box !important;
+  gap: 6px !important;
+}
+
+.rwanin-deck-left,
+.rwanin-deck-right {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: clamp(4px, 1vw, 8px) !important;
+}
+
+/* Responsive Hide for Mobile Clutter */
+@media (max-width: 768px) {
+  .rwanin-hide-mobile {
+    display: none !important;
+  }
+}
+
+/* Mini Play Button in Deck */
+.rwanin-mini-play-btn {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 10px !important;
+  background: #FFFFFF !important;
+  color: #08090C !important;
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2) !important;
+  transition: transform 0.15s ease, background 0.15s ease !important;
+  flex-shrink: 0 !important;
+}
+
+.rwanin-mini-play-btn:hover {
+  background: #EBECEF !important;
+  transform: scale(1.05) !important;
+}
+
+.rwanin-mini-play-btn:active {
+  transform: scale(0.95) !important;
+}
+
+/* Deck Icon Button */
+.rwanin-deck-icon-btn {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  color: #D7D9DF !important;
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: background 0.15s ease, color 0.15s ease !important;
+  flex-shrink: 0 !important;
+}
+
+.rwanin-deck-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #FFFFFF !important;
+}
+
+.rwanin-deck-icon-btn.is-active {
+  background: rgba(226, 183, 85, 0.25) !important;
+  color: #FACC15 !important;
+}
+
+.rwanin-deck-icon-btn.is-cover-active {
+  background: rgba(56, 189, 248, 0.25) !important;
+  color: #38bdf8 !important;
+}
+
+/* Digital Time Display */
+.rwanin-deck-time {
+  font-family: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, Consolas, monospace !important;
+  font-size: clamp(11px, 1.2vw, 13px) !important;
+  color: #A6A7AD !important;
+  padding: 0 4px !important;
+  white-space: nowrap !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.rwanin-deck-time .current {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+
+.rwanin-deck-time .separator {
+  color: #6e7079 !important;
+  margin: 0 3px !important;
+}
+
+/* Center Title in Deck */
+.rwanin-deck-title {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #D7D9DF !important;
+  max-width: 260px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  text-align: center !important;
+  opacity: 0.85 !important;
+}
+
+@media (max-width: 768px) {
+  .rwanin-deck-title {
+    display: none !important;
+  }
+}
+
+/* Settings Popover */
+.rwanin-settings-popover {
+  position: absolute !important;
+  bottom: 76px !important;
+  left: 16px !important;
+  z-index: 40 !important;
+  width: min(290px, calc(100vw - 32px)) !important;
+  background: rgba(14, 16, 22, 0.96) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 16px !important;
+  padding: 12px !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  direction: rtl !important;
+}
+
+/* Loading Overlay */
+.rwanin-loading-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  z-index: 20 !important;
+  pointer-events: none !important;
+}
+
+/* Error Overlay */
+.rwanin-error-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(8, 9, 12, 0.95) !important;
+  z-index: 35 !important;
+  padding: 24px !important;
+  text-align: center !important;
+}
+
+/* Fit Mode Toast Badge */
+.rwanin-fit-toast {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  background: rgba(10, 11, 16, 0.92) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+  border-radius: 999px !important;
+  padding: 10px 22px !important;
+  color: #FFFFFF !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.85) !important;
+  z-index: 50 !important;
+  pointer-events: none !important;
+  animation: rwaninToastIn 0.2s ease forwards;
+}
+
+@keyframes rwaninToastIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* ==========================================================================
+   YOUTUBE MOBILE PLAYER STYLES (Exact match with Image 2)
+   ========================================================================== */
+
+/* Full mobile overlay covering video with smooth dark scrim */
+.rwanin-yt-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(0, 0, 0, 0.42) !important;
+  z-index: 25 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  transition: opacity 0.25s ease !important;
+  box-sizing: border-box !important;
+  pointer-events: auto !important;
+}
+
+.rwanin-yt-overlay.hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.rwanin-yt-overlay.visible {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* Top Bar: Chevron down on left, Cast + CC + Settings on right */
+.rwanin-yt-topbar {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 10px 14px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  direction: ltr !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 100%) !important;
+}
+
+.rwanin-yt-topbar-left,
+.rwanin-yt-topbar-right {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.rwanin-yt-icon-btn {
+  background: transparent !important;
+  border: none !important;
+  color: #FFFFFF !important;
+  padding: 6px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+  outline: none !important;
+  transition: transform 0.15s ease, background 0.15s ease !important;
+}
+
+.rwanin-yt-icon-btn:active {
+  transform: scale(0.88) !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Center Hub: 3 translucent circular buttons */
+.rwanin-yt-center-hub {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(24px, 7vw, 48px) !important;
+  direction: ltr !important;
+  z-index: 26 !important;
+  pointer-events: auto !important;
+}
+
+.rwanin-yt-circle-btn {
+  width: clamp(44px, 12vw, 54px) !important;
+  height: clamp(44px, 12vw, 54px) !important;
+  border-radius: 50% !important;
+  background: rgba(0, 0, 0, 0.55) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #FFFFFF !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+  padding: 0 !important;
+  outline: none !important;
+  transition: transform 0.15s ease, background 0.15s ease !important;
+}
+
+.rwanin-yt-circle-btn:active {
+  transform: scale(0.9) !important;
+  background: rgba(0, 0, 0, 0.8) !important;
+}
+
+.rwanin-yt-circle-btn.play-center {
+  width: clamp(60px, 16vw, 76px) !important;
+  height: clamp(60px, 16vw, 76px) !important;
+  background: rgba(0, 0, 0, 0.65) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Bottom Bar: Time on left, Fullscreen on right, Red scrubber across bottom */
+.rwanin-yt-bottom-bar {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 0 14px 4px 14px !important;
+  direction: ltr !important;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, transparent 100%) !important;
+}
+
+.rwanin-yt-bottom-row {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  margin-bottom: 2px !important;
+}
+
+.rwanin-yt-time {
+  color: #FFFFFF !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.3px !important;
+  user-select: none !important;
+}
+
+.rwanin-yt-fullscreen-btn {
+  background: transparent !important;
+  border: none !important;
+  color: #FFFFFF !important;
+  padding: 6px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+  outline: none !important;
+}
+
+.rwanin-yt-fullscreen-btn:active {
+  transform: scale(0.9) !important;
+}
+
+/* Red Progress Scrubber Bar (flush at bottom) */
+.rwanin-yt-scrubber {
+  position: relative !important;
+  width: 100% !important;
+  height: 22px !important;
+  display: flex !important;
+  align-items: center !important;
+  cursor: pointer !important;
+  touch-action: none !important;
+}
+
+.rwanin-yt-scrubber-track {
+  position: relative !important;
+  width: 100% !important;
+  height: 3px !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+  border-radius: 999px !important;
+  overflow: visible !important;
+  transition: height 0.15s ease !important;
+}
+
+.rwanin-yt-scrubber:active .rwanin-yt-scrubber-track {
+  height: 5px !important;
+}
+
+.rwanin-yt-scrubber-buffered {
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  background: rgba(255, 255, 255, 0.45) !important;
+  border-radius: 999px !important;
+}
+
+.rwanin-yt-scrubber-played {
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  background: #FF0000 !important;
+  border-radius: 999px !important;
+}
+
+.rwanin-yt-scrubber-thumb {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 13px !important;
+  height: 13px !important;
+  border-radius: 50% !important;
+  background: #FF0000 !important;
+  border: 1.5px solid #FFFFFF !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
+  pointer-events: none !important;
+  transition: transform 0.1s ease !important;
+}
+
+.rwanin-yt-scrubber:active .rwanin-yt-scrubber-thumb {
+  transform: translate(-50%, -50%) scale(1.3) !important;
+}
+
+/* Subtle thin persistent progress bar when controls are hidden (like YouTube) */
+.rwanin-yt-mini-progress {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 2.5px !important;
+  background: rgba(255, 255, 255, 0.18) !important;
+  z-index: 15 !important;
+  pointer-events: none !important;
+  transition: opacity 0.25s ease !important;
+}
+
+.rwanin-yt-mini-progress-fill {
+  height: 100% !important;
+  background: #FF0000 !important;
+}

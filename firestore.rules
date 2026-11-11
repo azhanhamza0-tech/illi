@@ -1,0 +1,97 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Check if the user is an admin or owner based on Firestore role or custom claims
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.role in ['admin', 'owner', 'ADMIN', 'OWNER'] ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'owner', 'ADMIN', 'OWNER'])
+      );
+    }
+
+    // ==========================================
+    // USERS COLLECTION RULES
+    // ==========================================
+    match /users/{userId} {
+      // Users can read their own profile; Admins can read all profiles
+      allow read: if isOwner(userId) || isAdmin();
+
+      // Only the authenticated user can create their own document with default safe role
+      allow create: if isOwner(userId)
+                    && request.resource.data.uid == userId
+                    && request.resource.data.role in ['USER', 'user']
+                    && request.resource.data.package in ['FREE', 'free']
+                    && request.resource.data.vipStatus in ['inactive', null];
+
+      // Users can update only non-sensitive profile fields (fullName, phone, photoURL, avatar, etc.)
+      // Sensitive fields CANNOT be modified by normal users:
+      // role, package, vipStatus, vipExpiresAt, emailVerified, createdAt
+      allow update: if (isAdmin()) || (
+        isOwner(userId)
+        && request.resource.data.role == resource.data.role
+        && request.resource.data.package == resource.data.package
+        && request.resource.data.vipStatus == resource.data.vipStatus
+        && request.resource.data.vipExpiresAt == resource.data.vipExpiresAt
+        && request.resource.data.emailVerified == resource.data.emailVerified
+        && (!('createdAt' in resource.data) || request.resource.data.createdAt == resource.data.createdAt)
+      );
+
+      // Deletions are forbidden from client-side
+      allow delete: if false;
+    }
+
+    // ==========================================
+    // PUBLIC / MOVIE / WATCHLIST COLLECTIONS
+    // (Preserve existing functionality)
+    // ==========================================
+    match /movies/{movieId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /watchlist/{item} {
+      allow read, write: if isAuthenticated();
+    }
+
+    match /history/{item} {
+      allow read, write: if isAuthenticated();
+    }
+
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if isAuthenticated();
+      allow update, delete: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+    }
+
+    match /notifications/{notifId} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow write: if isAdmin();
+    }
+
+    match /payments/{paymentId} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated();
+      allow update, delete: if isAdmin();
+    }
+
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /videoUploads/{uploadId} {
+      allow read, write: if isAdmin();
+    }
+  }
+}

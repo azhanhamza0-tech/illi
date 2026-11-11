@@ -1,0 +1,508 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap');
+
+/* ==========================================================================
+   EXACT 3D LOGIN & SIGNUP STYLING (Cinema 3D Theme)
+   ========================================================================== */
+
+.auth-3d-page {
+  --bg1: #14112e;
+  --bg2: #2a1f6b;
+  --ink: #fff3e0;
+  --muted: #c7b59a;
+  --card: rgba(10, 7, 10, 0.82);
+  --line: rgba(255, 235, 200, 0.2);
+  --accent: #ffb347;
+  --accent-ink: #1a0f05;
+  --mint: #5ff0c4;
+  --err: #ff7a9a;
+  --face: rgba(255, 179, 71, 0.12);
+  --face-line: rgba(255, 179, 71, 0.55);
+
+  color-scheme: dark;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  font-family: 'Sora', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  background: #030203;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.auth-3d-page * {
+  box-sizing: border-box;
+}
+
+/* stage & world */
+.auth-3d-page .stage {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  perspective: 1400px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.auth-3d-page .world {
+  transform-style: preserve-3d;
+  position: relative;
+  width: min(400px, 100%);
+  transition: transform 0.15s ease-out;
+  z-index: 2;
+}
+
+/* cubes */
+.auth-3d-page .cube {
+  position: absolute;
+  transform-style: preserve-3d;
+  animation: spin 18s linear infinite;
+  pointer-events: none;
+}
+
+.auth-3d-page .cube i {
+  position: absolute;
+  inset: 0;
+  background: var(--face);
+  border: 1.5px solid var(--face-line);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.auth-3d-page .cube i:nth-child(1) { transform: translateZ(calc(var(--s) / 2)); }
+.auth-3d-page .cube i:nth-child(2) { transform: rotateY(180deg) translateZ(calc(var(--s) / 2)); }
+.auth-3d-page .cube i:nth-child(3) { transform: rotateY(90deg) translateZ(calc(var(--s) / 2)); }
+.auth-3d-page .cube i:nth-child(4) { transform: rotateY(-90deg) translateZ(calc(var(--s) / 2)); }
+.auth-3d-page .cube i:nth-child(5) { transform: rotateX(90deg) translateZ(calc(var(--s) / 2)); }
+.auth-3d-page .cube i:nth-child(6) { transform: rotateX(-90deg) translateZ(calc(var(--s) / 2)); }
+
+.auth-3d-page .c1 {
+  --s: 110px;
+  width: 110px;
+  height: 110px;
+  left: -150px;
+  top: -40px;
+  transform: translateZ(-120px);
+}
+
+.auth-3d-page .c2 {
+  --s: 70px;
+  width: 70px;
+  height: 70px;
+  right: -110px;
+  top: 60px;
+  transform: translateZ(60px);
+  animation-duration: 12s;
+  animation-direction: reverse;
+}
+
+.auth-3d-page .c3 {
+  --s: 150px;
+  width: 150px;
+  height: 150px;
+  right: -170px;
+  bottom: -60px;
+  transform: translateZ(-220px);
+  animation-duration: 26s;
+}
+
+.auth-3d-page .c4 {
+  --s: 54px;
+  width: 54px;
+  height: 54px;
+  left: -90px;
+  bottom: 30px;
+  transform: translateZ(90px);
+  animation-duration: 10s;
+}
+
+@keyframes spin {
+  from {
+    transform: rotateX(20deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(380deg) rotateY(360deg);
+  }
+}
+
+/* flip card */
+.auth-3d-page .flip {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.3, 0.7, 0.2, 1);
+  min-height: 560px;
+}
+
+.auth-3d-page .flip.back {
+  transform: rotateY(180deg);
+}
+
+.auth-3d-page .face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 32px 28px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 40px 60px -30px rgba(23, 19, 58, 0.55), 0 2px 0 rgba(255, 255, 255, 0.35) inset;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-3d-page .face.signup {
+  transform: rotateY(180deg);
+}
+
+.auth-3d-page .flip:not(.back) .signup,
+.auth-3d-page .flip.back .login {
+  visibility: hidden;
+  transition: visibility 0s 0.4s;
+}
+
+.auth-3d-page h1 {
+  font-size: 1.65rem;
+  line-height: 1.15;
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.auth-3d-page p.sub {
+  margin: 0 0 22px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.auth-3d-page label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin: 14px 0 6px;
+  color: var(--ink);
+}
+
+.auth-3d-page .field {
+  position: relative;
+}
+
+.auth-3d-page input {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: transparent;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 13px 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  box-sizing: border-box;
+}
+
+.auth-3d-page input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent);
+  transform: translateZ(20px);
+}
+
+.auth-3d-page input[aria-invalid="true"] {
+  border-color: var(--err);
+}
+
+.auth-3d-page .err {
+  color: var(--err);
+  font-size: 0.78rem;
+  min-height: 1.1em;
+  margin-top: 4px;
+}
+
+.auth-3d-page .eye {
+  position: absolute;
+  right: 8px;
+  top: 7px;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 7px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.auth-3d-page .eye:hover {
+  color: var(--ink);
+}
+
+.auth-3d-page .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.auth-3d-page .row label {
+  margin: 0;
+  font-weight: 400;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.auth-3d-page .row input {
+  width: auto;
+  accent-color: var(--accent);
+}
+
+.auth-3d-page a,
+.auth-3d-page .link {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  background: none;
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+.auth-3d-page a:hover,
+.auth-3d-page .link:hover {
+  text-decoration: underline;
+}
+
+.auth-3d-page .btn {
+  margin-top: 22px;
+  width: 100%;
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 0;
+  border-radius: 14px;
+  padding: 15px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 color-mix(in srgb, var(--accent) 55%, #000), 0 18px 26px -10px color-mix(in srgb, var(--accent) 60%, transparent);
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+
+.auth-3d-page .btn:hover {
+  transform: translateY(-2px);
+}
+
+.auth-3d-page .btn:active {
+  transform: translateY(5px);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 55%, #000), 0 6px 10px -6px color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+.auth-3d-page .btn:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+.auth-3d-page .switch {
+  margin-top: auto;
+  padding-top: 22px;
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.auth-3d-page .ok {
+  display: none;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--mint) 22%, transparent);
+  border: 1px solid var(--mint);
+  font-size: 0.88rem;
+  color: var(--mint);
+}
+
+.auth-3d-page .ok.show {
+  display: block;
+}
+
+.auth-3d-page :focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 520px) {
+  .auth-3d-page .cube {
+    display: none;
+  }
+  .auth-3d-page .face {
+    padding: 26px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-3d-page .cube {
+    animation: none;
+  }
+  .auth-3d-page .flip {
+    transition: none;
+  }
+  .auth-3d-page .world {
+    transition: none;
+  }
+}
+
+/* cinema theme elements */
+.auth-3d-page .cinema {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: radial-gradient(90% 70% at 50% 18%, #120a0e 0%, #060305 60%, #020103 100%);
+  z-index: 0;
+}
+
+.auth-3d-page .screen {
+  position: absolute;
+  top: 7vh;
+  left: 50%;
+  width: min(62vw, 820px);
+  height: 34vh;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at center, #fff6e4 0%, #ffd9a0 35%, #a36a3a 75%, transparent 100%);
+  border-radius: 6px;
+  filter: blur(1px);
+  opacity: 0.5;
+  box-shadow: 0 0 100px 30px rgba(255, 200, 120, 0.16);
+  animation: flicker 5s steps(1) infinite;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 0.5; }
+  8% { opacity: 0.42; }
+  10% { opacity: 0.54; }
+  52% { opacity: 0.46; }
+  54% { opacity: 0.55; }
+}
+
+.auth-3d-page .beam {
+  position: absolute;
+  left: 50%;
+  bottom: -5vh;
+  width: 70vw;
+  height: 70vh;
+  transform: translateX(-50%);
+  background: linear-gradient(to top, rgba(255, 225, 170, 0) 0%, rgba(255, 225, 170, 0.07) 100%);
+  clip-path: polygon(47% 100%, 53% 100%, 100% 0, 0 0);
+}
+
+.auth-3d-page .curtain {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 11vw;
+  background: repeating-linear-gradient(90deg, #1f0409 0, #45090f 14px, #150306 30px);
+  z-index: 1;
+}
+
+.auth-3d-page .curtain.l {
+  left: 0;
+  box-shadow: 30px 0 60px rgba(0, 0, 0, 0.7);
+  clip-path: polygon(0 0, 100% 0, 60% 100%, 0 100%);
+}
+
+.auth-3d-page .curtain.r {
+  right: 0;
+  box-shadow: -30px 0 60px rgba(0, 0, 0, 0.7);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 40% 100%);
+}
+
+.auth-3d-page .strip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 30px;
+  background: #000;
+  border-bottom: 1px solid rgba(255, 235, 200, 0.25);
+  z-index: 3;
+}
+
+.auth-3d-page .strip::before {
+  content: "";
+  position: absolute;
+  inset: 7px 0;
+  background: repeating-linear-gradient(90deg, #f0e0c0 0 14px, transparent 14px 30px);
+  border-radius: 3px;
+  opacity: 0.45;
+  animation: roll 3s linear infinite;
+}
+
+@keyframes roll {
+  to {
+    background-position: 30px 0;
+  }
+}
+
+.auth-3d-page .seats {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 24vh;
+  background: linear-gradient(to top, #000 0%, transparent 100%);
+}
+
+.auth-3d-page .seats::before,
+.auth-3d-page .seats::after {
+  content: "";
+  position: absolute;
+  left: -20px;
+  right: -20px;
+  background-repeat: repeat-x;
+}
+
+.auth-3d-page .seats::before {
+  bottom: 34px;
+  height: 46px;
+  background-image: radial-gradient(ellipse 22px 20px at 50% 100%, #1a0c12 96%, transparent 100%);
+  background-size: 56px 46px;
+  opacity: 0.9;
+}
+
+.auth-3d-page .seats::after {
+  bottom: -6px;
+  height: 70px;
+  background-image: radial-gradient(ellipse 36px 34px at 50% 100%, #000 96%, transparent 100%);
+  background-size: 92px 70px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-3d-page .screen {
+    animation: none;
+  }
+  .auth-3d-page .strip::before {
+    animation: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .auth-3d-page .curtain {
+    width: 6vw;
+  }
+  .auth-3d-page .screen {
+    width: 90vw;
+  }
+}

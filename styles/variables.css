@@ -1,0 +1,127 @@
+/* ==========================================================================
+   RWANIN (ڕوانین) — THEME VARIABLES & DESIGN TOKENS
+   Premium Cinematic Streaming (Dark Cinematic & Silver Luxury Identity)
+   Full Kurdish Sorani & RTL Architecture
+   ========================================================================== */
+
+:root {
+  /* Stitch Ultra-Premium Cinematic Palette */
+  --bg: #08090D;
+  --card: #171A22;
+  --text: #E2E8F0;
+  --mute: #94A3B8;
+  --acc: #8083ff;
+  --gold: #ecc15e;
+  --hero1: #101218;
+
+  /* Core Cinematic Dark Palette */
+  --bg-main: #08090D;
+  --bg-secondary: #101218;
+  --bg-card: #171A22;
+  --bg-card-hover: #1e1f24;
+  --bg-glass: rgba(16, 18, 24, 0.85);
+  --bg-glass-card: rgba(23, 26, 34, 0.92);
+  --bg-elevated: #1e1f24;
+
+  /* Typography */
+  --text-primary: #e3e2e8;
+  --text-secondary: #94A3B8;
+  --text-muted: #908fa0;
+  --text-silver: #E2E8F0;
+  --text-silver-bright: #ffffff;
+
+  /* Accent Colors (Electric Violet, Cyan & Gold Cinema Identity) */
+  --silver-gradient: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, #c0c1ff 100%);
+  --silver-glow: rgba(192, 193, 255, 0.3);
+  --silver-border: rgba(192, 193, 255, 0.16);
+  --accent-cyan: #38BDF8;
+  --accent-blue: #8083ff;
+  --accent-vip: #ecc15e;
+  --accent-vip-gradient: linear-gradient(135deg, #ecc15e 0%, #b28b2d 100%);
+  --accent-vip-bg: rgba(236, 193, 94, 0.14);
+  --accent-live: #ffb4ab;
+
+  /* Borders & Dividers */
+  --border-subtle: rgba(192, 193, 255, 0.12);
+  --border-strong: rgba(192, 193, 255, 0.22);
+  --border-silver: rgba(192, 193, 255, 0.35);
+
+  /* Shadows & Glassmorphism */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.7);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.85);
+  --shadow-glow: 0 0 35px rgba(192, 193, 255, 0.2);
+  --shadow-card: 0 12px 32px -10px rgba(0, 0, 0, 0.8);
+
+  /* Blur */
+  --blur-header: blur(16px);
+  --blur-modal: blur(24px);
+
+  /* Spacing & Sizes */
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 80px;
+  --sidebar-current-width: 260px;
+  --header-height: clamp(56px, 7vw, 72px);
+  --mobile-nav-height: 64px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Safe Area Insets (iOS Notches & Modern Android Gesture Bars) */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+
+  /* Touch Target Standards (Apple HIG & Material Design) */
+  --touch-target-min: 44px;
+  --touch-target-primary: 48px;
+
+  /* Responsive Fluid Spacing & Layout Constraints */
+  --page-padding-x: clamp(14px, 3.5vw, 36px);
+  --page-padding-y: clamp(16px, 3vw, 32px);
+  --content-max-width: 1780px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Fonts (Kurdish Vazirmatn primary with English Fallbacks) */
+  --font-kurdish: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif;
+  --font-display: 'Outfit', 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Vazirmatn', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Light Theme */
+[data-theme="light"] {
+  --bg-main: #F4F5F8;
+  --bg-secondary: #EBECEF;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F8F9FA;
+  --bg-glass: rgba(244, 245, 248, 0.85);
+  --bg-glass-card: rgba(255, 255, 255, 0.9);
+  --bg-elevated: #FFFFFF;
+
+  --text-primary: #121316;
+  --text-secondary: #5A5D67;
+  --text-muted: #8E919D;
+  --text-silver: #3A3C44;
+  --text-silver-bright: #121316;
+
+  --silver-gradient: linear-gradient(135deg, #2D3039 0%, #4A4D59 50%, #1E2026 100%);
+  --silver-glow: rgba(58, 60, 68, 0.15);
+  --silver-border: rgba(58, 60, 68, 0.2);
+
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.15);
+  --border-silver: rgba(58, 60, 68, 0.3);
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0 0 25px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
+}

@@ -1,0 +1,1032 @@
+/* ==========================================================================
+   RWANIN (ڕوانین) — CINEMATIC MEMBER AUTHENTICATION (PHASE 1 PRD)
+   Ultra-Premium Cinematic Streaming Platform
+   Design System Baseline: "Cinematic Luminescence"
+   Palette: Deep Space Obsidian (#070711), Electric Violet (#8B5CF6), Cyan (#22D3EE), Magenta (#EC4899)
+   ========================================================================== */
+
+:root {
+  --obsidian-base: #070711;
+  --obsidian-surface: #0b1020;
+  --obsidian-deep: #160d2b;
+  --electric-violet: #8b5cf6;
+  --neon-purple: #a855f7;
+  --electric-blue: #3b82f6;
+  --neon-cyan: #22d3ee;
+  --vivid-magenta: #ec4899;
+  --vivid-pink: #f472b6;
+
+  --glass-bg: rgba(27, 27, 38, 0.65);
+  --glass-card: rgba(11, 16, 32, 0.78);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-border-accent: rgba(139, 92, 246, 0.38);
+
+  --shadow-neon-violet: 0 0 50px rgba(139, 92, 246, 0.25), 0 25px 60px rgba(7, 7, 17, 0.9);
+  --shadow-neon-cyan: 0 0 40px rgba(34, 211, 238, 0.22);
+  --shadow-neon-magenta: 0 0 45px rgba(236, 72, 153, 0.2);
+}
+
+/* Master Stage Viewport */
+.cinematic-auth-viewport {
+  position: relative;
+  min-height: 100dvh;
+  width: 100%;
+  background: radial-gradient(circle at 50% 0%, #160d2b 0%, #0b1020 40%, #070711 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow-x: hidden;
+  direction: rtl;
+  font-family: 'Plus Jakarta Sans', 'Noto Kufi Arabic', 'Vazirmatn', -apple-system, sans-serif;
+  color: #ffffff;
+  padding: 16px 20px 24px;
+  box-sizing: border-box;
+  perspective: 1200px;
+}
+
+/* Ambient Ray Beams & Neon Illumination */
+.cinematic-projector-beam {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(139, 92, 246, 0.28) 0%, rgba(34, 211, 238, 0.12) 40%, rgba(7, 7, 17, 0) 75%);
+  clip-path: polygon(38% 0%, 62% 0%, 100% 100%, 0% 100%);
+  filter: blur(35px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cinematic-neon-glow-violet {
+  position: absolute;
+  top: 25%;
+  left: 8%;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.22) 0%, rgba(139, 92, 246, 0) 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cinematic-neon-glow-cyan {
+  position: absolute;
+  bottom: 20%;
+  right: 6%;
+  width: 440px;
+  height: 440px;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.18) 0%, rgba(34, 211, 238, 0) 70%);
+  filter: blur(65px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cinematic-neon-glow-magenta {
+  position: absolute;
+  bottom: 5%;
+  left: 20%;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.14) 0%, rgba(236, 72, 153, 0) 70%);
+  filter: blur(55px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Subtle Film Grain Texture Overlay */
+.cinematic-grain-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* --------------------------------------------------------------------------
+   TOP BRAND & NAVIGATION BAR
+   -------------------------------------------------------------------------- */
+.cinematic-top-nav {
+  position: relative;
+  z-index: 30;
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+}
+
+.cinematic-brand-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  direction: ltr;
+}
+
+.cinematic-brand-emblem {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.4) 0%, rgba(34, 211, 238, 0.2) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.35);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+
+.cinematic-brand-emblem::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), transparent 60%);
+  pointer-events: none;
+}
+
+.cinematic-brand-titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.cinematic-brand-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  background: linear-gradient(135deg, #ffffff 30%, #e2d9fc 60%, #a855f7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+}
+
+.cinematic-brand-sub {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.cinematic-brand-sub .live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22d3ee;
+  box-shadow: 0 0 8px #22d3ee;
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* Spatial Sound Engine Status Pill */
+.cinematic-audio-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(11, 16, 32, 0.75);
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.15);
+  backdrop-filter: blur(16px);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.cinematic-audio-status-pill:hover {
+  border-color: rgba(34, 211, 238, 0.6);
+  background: rgba(16, 24, 48, 0.85);
+  box-shadow: 0 0 25px rgba(34, 211, 238, 0.3);
+  transform: translateY(-1px);
+}
+
+.cinematic-wave-bars {
+  display: flex;
+  align-items: center;
+  gap: 2.5px;
+  height: 14px;
+}
+
+.cinematic-wave-bar {
+  width: 2.5px;
+  border-radius: 999px;
+  background: #22d3ee;
+  box-shadow: 0 0 6px rgba(34, 211, 238, 0.8);
+  animation: wave-bounce 1.2s ease-in-out infinite;
+}
+
+.cinematic-wave-bar:nth-child(1) { height: 6px; animation-delay: 0.1s; }
+.cinematic-wave-bar:nth-child(2) { height: 13px; animation-delay: 0.3s; }
+.cinematic-wave-bar:nth-child(3) { height: 8px; animation-delay: 0.5s; }
+.cinematic-wave-bar:nth-child(4) { height: 14px; animation-delay: 0.2s; }
+.cinematic-wave-bar:nth-child(5) { height: 9px; animation-delay: 0.4s; }
+
+.cinematic-wave-bars.muted .cinematic-wave-bar {
+  animation: none;
+  height: 3px !important;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: none;
+}
+
+@keyframes wave-bounce {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1); }
+}
+
+.cinematic-audio-label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #22d3ee;
+  font-family: monospace;
+}
+
+/* Home Link Action */
+.cinematic-home-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  transition: all 0.25s ease;
+}
+
+.cinematic-home-action:hover {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   3D PERSPECTIVE STAGE & POSTER ARRAY
+   -------------------------------------------------------------------------- */
+.cinematic-stage-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1360px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 700px;
+  transform-style: preserve-3d;
+  will-change: transform;
+  margin: 12px 0;
+}
+
+/* 3D Showcase Posters Array (Floating in Perspective Space) */
+.cinematic-poster-cluster {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  z-index: 2;
+  transition: transform 0.15s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.cinematic-poster-card {
+  position: absolute;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 35px rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #0b1020;
+  transform-style: preserve-3d;
+  transition: all 0.3s ease;
+  will-change: transform, opacity;
+  pointer-events: auto;
+}
+
+.cinematic-poster-card:hover {
+  border-color: rgba(34, 211, 238, 0.7);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 50px rgba(34, 211, 238, 0.4);
+  transform: scale(1.04) translateZ(40px) !important;
+}
+
+.cinematic-poster-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: contrast(1.05) saturate(1.1);
+  transition: filter 0.3s ease;
+}
+
+.cinematic-poster-card:hover img {
+  filter: contrast(1.1) saturate(1.2);
+}
+
+.cinematic-poster-card .poster-badge-top {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(7, 7, 17, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 9px;
+  font-family: monospace;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #22d3ee;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+.cinematic-poster-card .poster-overlay-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 12px 10px;
+  background: linear-gradient(to top, rgba(7, 7, 17, 0.95) 0%, rgba(7, 7, 17, 0.7) 60%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cinematic-poster-card .poster-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cinematic-poster-card .poster-meta {
+  font-size: 10px;
+  font-family: monospace;
+  color: #a855f7;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Individual Poster Positioning in 3D Space */
+.poster-p1 {
+  top: 4%;
+  left: 2%;
+  width: 200px;
+  height: 295px;
+  transform: translateZ(20px) rotateY(12deg) rotateX(-6deg);
+  opacity: 0.85;
+}
+
+.poster-p2 {
+  bottom: 6%;
+  left: 5%;
+  width: 215px;
+  height: 315px;
+  transform: translateZ(50px) rotateY(14deg) rotateX(4deg);
+  opacity: 0.92;
+}
+
+.poster-p3 {
+  top: 6%;
+  right: 2%;
+  width: 205px;
+  height: 300px;
+  transform: translateZ(25px) rotateY(-12deg) rotateX(-6deg);
+  opacity: 0.85;
+}
+
+.poster-p4 {
+  bottom: 4%;
+  right: 4%;
+  width: 220px;
+  height: 325px;
+  transform: translateZ(60px) rotateY(-14deg) rotateX(4deg);
+  opacity: 0.94;
+}
+
+.poster-p5 {
+  top: 38%;
+  left: -4%;
+  width: 170px;
+  height: 250px;
+  transform: translateZ(-60px) rotateY(20deg);
+  opacity: 0.45;
+  filter: blur(1px);
+}
+
+.poster-p6 {
+  top: 36%;
+  right: -4%;
+  width: 170px;
+  height: 250px;
+  transform: translateZ(-60px) rotateY(-20deg);
+  opacity: 0.45;
+  filter: blur(1px);
+}
+
+/* --------------------------------------------------------------------------
+   THE MAIN CINEMATIC GLASSMORPHIC CARD (SCREEN_2)
+   -------------------------------------------------------------------------- */
+.cinematic-auth-card {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  max-width: 470px;
+  box-sizing: border-box;
+  background: linear-gradient(160deg, rgba(27, 27, 38, 0.72) 0%, rgba(11, 16, 32, 0.84) 60%, rgba(7, 7, 17, 0.92) 100%);
+  border: 1px solid transparent;
+  border-image: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(139, 92, 246, 0.45) 50%, rgba(34, 211, 238, 0.3) 100%) 1;
+  border-radius: 28px;
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.85), 0 0 50px rgba(139, 92, 246, 0.22), 0 0 80px rgba(34, 211, 238, 0.1);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  padding: 36px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transform-style: preserve-3d;
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+/* Glass Edge Illumination Glow */
+.cinematic-auth-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), rgba(139, 92, 246, 0.8), rgba(34, 211, 238, 0.8), transparent);
+  pointer-events: none;
+}
+
+/* Header inside card */
+.cinematic-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.cinematic-luxury-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  color: #e2d9fc;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.cinematic-card-title {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', 'Noto Kufi Arabic', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  background: linear-gradient(135deg, #ffffff 40%, #e2d9fc 80%, #a855f7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.cinematic-card-desc {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.5;
+  max-width: 360px;
+}
+
+/* --------------------------------------------------------------------------
+   MODE SWITCHER TABS (PILLS)
+   -------------------------------------------------------------------------- */
+.cinematic-mode-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 14px;
+  background: rgba(7, 7, 17, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.cinematic-mode-tab {
+  flex: 1;
+  padding: 9px 8px;
+  border-radius: 10px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.65);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.cinematic-mode-tab:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.cinematic-mode-tab.active {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.8) 0%, rgba(109, 40, 217, 0.9) 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cinematic-mode-tab.vip-active {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.9) 0%, rgba(236, 72, 153, 0.9) 100%);
+  box-shadow: 0 4px 18px rgba(236, 72, 153, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* --------------------------------------------------------------------------
+   FORM MICRO-INTERACTIONS & FLOATING LABELS
+   -------------------------------------------------------------------------- */
+.cinematic-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.cinematic-floating-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.cinematic-input-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 14px;
+  background: rgba(7, 7, 17, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.cinematic-input-box:focus-within {
+  border-color: #8b5cf6;
+  background: rgba(11, 16, 32, 0.85);
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.3), inset 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.cinematic-input-box.vip-box:focus-within {
+  border-color: #ec4899;
+  box-shadow: 0 0 25px rgba(236, 72, 153, 0.35);
+}
+
+.cinematic-field-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.2s ease;
+  pointer-events: none;
+}
+
+.cinematic-input-box:focus-within .cinematic-field-icon {
+  color: #22d3ee;
+}
+
+.cinematic-input {
+  flex: 1;
+  min-width: 0;
+  height: 52px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  padding: 16px 12px 6px;
+  direction: ltr;
+  text-align: right;
+  box-sizing: border-box;
+}
+
+.cinematic-input::placeholder {
+  color: transparent; /* Needed for floating label logic */
+}
+
+/* Floating Label Typography & Motion */
+.cinematic-floating-label {
+  position: absolute;
+  right: 48px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0.2, 1);
+  transform-origin: right center;
+  z-index: 2;
+}
+
+/* Floating label triggers on focus or when input is non-empty */
+.cinematic-input:focus ~ .cinematic-floating-label,
+.cinematic-input:not(:placeholder-shown) ~ .cinematic-floating-label,
+.cinematic-floating-group.active .cinematic-floating-label {
+  top: 10px;
+  transform: translateY(0) scale(0.8);
+  color: #22d3ee;
+  font-weight: 600;
+}
+
+.cinematic-floating-group.vip-group .cinematic-input:focus ~ .cinematic-floating-label,
+.cinematic-floating-group.vip-group .cinematic-input:not(:placeholder-shown) ~ .cinematic-floating-label {
+  color: #f472b6;
+}
+
+/* Visibility Toggle Button */
+.cinematic-eye-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 0 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.cinematic-eye-btn:hover {
+  color: #22d3ee;
+  transform: scale(1.1);
+}
+
+/* Row Actions (Remember me & Forgot password) */
+.cinematic-form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.cinematic-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cinematic-checkbox-label input[type='checkbox'] {
+  accent-color: #8b5cf6;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.cinematic-text-link {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.cinematic-text-link:hover {
+  color: #22d3ee;
+  text-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   PRIMARY CTA BUTTONS & GLOW
+   -------------------------------------------------------------------------- */
+.cinematic-primary-btn {
+  position: relative;
+  width: 100%;
+  height: 52px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 30px rgba(139, 92, 246, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.cinematic-primary-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: 0.5s ease;
+}
+
+.cinematic-primary-btn:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.cinematic-primary-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(139, 92, 246, 0.65), 0 0 25px rgba(34, 211, 238, 0.35);
+  border-color: rgba(34, 211, 238, 0.6);
+}
+
+.cinematic-primary-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.cinematic-vip-btn {
+  background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+  box-shadow: 0 8px 30px rgba(236, 72, 153, 0.45);
+}
+
+.cinematic-vip-btn:hover:not(:disabled) {
+  box-shadow: 0 12px 35px rgba(236, 72, 153, 0.65), 0 0 25px rgba(168, 85, 247, 0.4);
+  border-color: rgba(244, 114, 182, 0.6);
+}
+
+/* --------------------------------------------------------------------------
+   DIVIDER & SSO ACTIONS (GOOGLE & APPLE)
+   -------------------------------------------------------------------------- */
+.cinematic-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 4px 0;
+}
+
+.cinematic-divider::before,
+.cinematic-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+}
+
+.cinematic-sso-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.cinematic-sso-btn {
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(7, 7, 17, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+.cinematic-sso-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.25);
+  transform: translateY(-1px);
+}
+
+.cinematic-sso-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* --------------------------------------------------------------------------
+   MESSAGES & TOAST ALERTS
+   -------------------------------------------------------------------------- */
+.cinematic-alert {
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: slide-in 0.3s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.cinematic-alert.error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+}
+
+.cinematic-alert.success {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #86efac;
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+}
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   FOOTER TECHNICAL SPECIFICATION ROW (CINEMATIC LUMINESCENCE)
+   -------------------------------------------------------------------------- */
+.cinematic-specs-footer {
+  position: relative;
+  z-index: 30;
+  width: 100%;
+  max-width: 1100px;
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px 24px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: rgba(11, 16, 32, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+}
+
+.cinematic-spec-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+}
+
+.cinematic-spec-item .spec-glow-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #22d3ee;
+  box-shadow: 0 0 8px #22d3ee;
+}
+
+.cinematic-spec-item:nth-child(2) .spec-glow-dot {
+  background: #8b5cf6;
+  box-shadow: 0 0 8px #8b5cf6;
+}
+
+.cinematic-spec-item:nth-child(3) .spec-glow-dot {
+  background: #ec4899;
+  box-shadow: 0 0 8px #ec4899;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN (MOBILE & TABLET ADAPTATION)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .poster-p5,
+  .poster-p6 {
+    display: none;
+  }
+
+  .poster-p1 {
+    width: 160px;
+    height: 240px;
+    left: -2%;
+  }
+
+  .poster-p2 {
+    width: 160px;
+    height: 240px;
+    left: 0;
+  }
+
+  .poster-p3 {
+    width: 160px;
+    height: 240px;
+    right: -2%;
+  }
+
+  .poster-p4 {
+    width: 160px;
+    height: 240px;
+    right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .cinematic-auth-viewport {
+    padding: 12px 14px 20px;
+  }
+
+  .cinematic-top-nav {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  /* On mobile, soften the posters so they act as a dreamy background behind the card */
+  .cinematic-poster-cluster {
+    opacity: 0.35;
+    filter: blur(2px);
+  }
+
+  .poster-p1 {
+    top: 2%;
+    left: -20px;
+    transform: rotate(-10deg) scale(0.85);
+  }
+
+  .poster-p3 {
+    top: 2%;
+    right: -20px;
+    transform: rotate(10deg) scale(0.85);
+  }
+
+  .poster-p2 {
+    bottom: 2%;
+    left: -20px;
+    transform: rotate(10deg) scale(0.85);
+  }
+
+  .poster-p4 {
+    bottom: 2%;
+    right: -20px;
+    transform: rotate(-10deg) scale(0.85);
+  }
+
+  .cinematic-auth-card {
+    padding: 28px 20px 24px;
+    border-radius: 22px;
+  }
+
+  .cinematic-card-title {
+    font-size: 22px;
+  }
+
+  .cinematic-specs-footer {
+    gap: 8px 16px;
+    border-radius: 16px;
+  }
+}
